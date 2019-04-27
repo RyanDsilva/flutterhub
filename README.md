@@ -1,8 +1,12 @@
-# FlutterHub
+# FlutterHub :octocat:
 
 > A GitHub client that provides a great mobile UI to analyse GitHub profiles built with Flutter
 
----
+### References:
+
+The following repositories and guides were of great help during the completion of this project.
+
+- [Flutter GitHub API](https://github.com/nitishk72/Flutter-Github-API) by [nitishk72](https://github.com/nitishk72)
 
 #### Please Note:
 
