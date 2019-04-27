@@ -1,4 +1,4 @@
-# FlutterHub :octocat:
+# FlutterHub 💻
 
 > A GitHub client that provides a great mobile UI to analyse GitHub profiles built with Flutter
 
