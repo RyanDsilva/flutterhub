@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:fluro/fluro.dart';
+
+import 'package:flutterhub/util/routes.dart';
 
 void main() => runApp(FlutterHub());
 
-class FlutterHub extends StatelessWidget {
+class FlutterHub extends StatefulWidget {
+  @override
+  _FlutterHubState createState() => _FlutterHubState();
+}
+
+class _FlutterHubState extends State<FlutterHub> {
+  final router = new Router();
+
+  @override
+  void initState() {
+    super.initState();
+    Routes.configureRoutes(router);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,15 +29,7 @@ class FlutterHub extends StatelessWidget {
         primaryColor: Colors.green,
         accentColor: Colors.white,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("FlutterHub"),
-          centerTitle: true,
-        ),
-        body: Center(
-          child: Text("FlutterHub"),
-        ),
-      ),
+      onGenerateRoute: router.generator,
     );
   }
 }
