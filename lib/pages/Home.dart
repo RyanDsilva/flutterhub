@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutterhub/components/TextStyles.dart';
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -10,7 +12,10 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: Text("FlutterHub"),
+        title: Text(
+          "FlutterHub",
+          style: titleStyle,
+        ),
         centerTitle: true,
       ),
       body: new Center(

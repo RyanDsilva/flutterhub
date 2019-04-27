@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterhub/models/User.dart';
 import 'package:flutterhub/models/Repo.dart';
 
+import 'package:flutterhub/components/TextStyles.dart';
 import 'package:flutterhub/pages/Profile.dart';
 import 'package:flutterhub/pages/Repos.dart';
 import 'package:flutterhub/pages/Followers.dart';
@@ -23,7 +24,10 @@ class _TabsState extends State<Tabs> {
       length: 3,
       child: Scaffold(
         appBar: new AppBar(
-          title: Text("FlutterHub"),
+          title: Text(
+            "FlutterHub",
+            style: titleStyle,
+          ),
           centerTitle: true,
         ),
         bottomNavigationBar: TabBar(
@@ -47,7 +51,7 @@ class _TabsState extends State<Tabs> {
             Profile(
               user: new User(
                 name: "Ryan Dsilva",
-                image: "/",
+                image: "https://avatars2.githubusercontent.com/u/29952177?v=4",
                 bio: "20 | Deep Learning and Full Stack Developer",
                 location: "Mumbai, India",
                 url: "/",

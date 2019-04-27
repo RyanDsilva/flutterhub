@@ -1,5 +1,7 @@
 # FlutterHub 💻
 
+[![Codemagic build status](https://api.codemagic.io/apps/5cc494367d0170000f887fa3/5cc494367d0170000f887fa2/status_badge.svg)](https://codemagic.io/apps/5cc494367d0170000f887fa3/5cc494367d0170000f887fa2/latest_build)
+
 > A GitHub client that provides a great mobile UI to analyse GitHub profiles built with Flutter
 
 ### References:

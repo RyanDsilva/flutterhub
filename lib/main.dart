@@ -25,6 +25,7 @@ class _FlutterHubState extends State<FlutterHub> {
       title: 'FlutterHub',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: "Ubuntu",
         brightness: Brightness.dark,
         primaryColor: Colors.green,
         accentColor: Colors.white,
