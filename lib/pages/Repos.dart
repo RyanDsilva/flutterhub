@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutterhub/components/TextStyles.dart';
+import 'package:flutterhub/components/ListItem.dart';
 import 'package:flutterhub/models/Repo.dart';
 
 class Repos extends StatelessWidget {
@@ -10,15 +10,7 @@ class Repos extends StatelessWidget {
   List<Widget> createRepoView() {
     List<Widget> repositories = new List<Widget>();
     for (var r in this.repos) {
-      var l = ListTile(
-        title: Text(
-          r.name,
-          style: titleStyle,
-        ),
-        isThreeLine: true,
-        contentPadding: EdgeInsets.all(5),
-        subtitle: Text(r.language),
-      );
+      var l = ListItem(repo: r);
       repositories.add(l);
     }
     return repositories;

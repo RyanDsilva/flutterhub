@@ -5,6 +5,7 @@ import 'package:flutterhub/models/Repo.dart';
 
 import 'package:flutterhub/util/network.dart';
 import 'package:flutterhub/util/url.dart';
+import 'package:flutterhub/util/GitHub.dart';
 
 import 'package:flutterhub/components/TextStyles.dart';
 import 'package:flutterhub/pages/Profile.dart';
@@ -31,13 +32,21 @@ class _TabsState extends State<Tabs> {
   }
 
   Future<User> getUser() async {
-    final res = await http.get(this.mainUrl.getURL());
+    final res = await http.get(this.mainUrl.getURL() +
+        '?client_id=' +
+        clientID +
+        '&client_secret=' +
+        clientSecret);
     return User.fromJSON(res);
   }
 
   Future<List<Repo>> getRepos() async {
     List<Repo> repos = new List<Repo>();
-    final res = await http.get(this.mainUrl.getReposURL());
+    final res = await http.get(this.mainUrl.getReposURL() +
+        '?client_id=' +
+        clientID +
+        '&client_secret=' +
+        clientSecret);
     for (var r in res) {
       repos.add(Repo.fromJSON(r));
     }
