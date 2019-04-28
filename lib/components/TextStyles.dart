@@ -22,3 +22,9 @@ final repoLang = new TextStyle(
   fontSize: 16,
   color: Colors.tealAccent,
 );
+
+final bioText = new TextStyle(
+  fontFamily: "UbuntuMono",
+  fontSize: 16,
+  color: Colors.grey,
+);

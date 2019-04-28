@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:timeago/timeago.dart' as timeAgo;
 
 import 'package:flutterhub/components/TextStyles.dart';
 import 'package:flutterhub/components/DarkCard.dart';
@@ -11,6 +12,7 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final timestamp = DateTime.parse(this.user.createdAt);
     return SingleChildScrollView(
       padding: EdgeInsets.all(5),
       primary: true,
@@ -39,10 +41,65 @@ class Profile extends StatelessWidget {
                     Text(
                       this.user.name,
                       style: titleStyle,
+                      textAlign: TextAlign.center,
                     ),
-                    Text(this.user.bio),
-                    Text(this.user.location),
-                    Text(this.user.createdAt),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 15,
+                        vertical: 7.5,
+                      ),
+                      child: Text(
+                        this.user.bio,
+                        style: bioText,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(Icons.home),
+                        VerticalDivider(
+                          width: 5,
+                        ),
+                        Text(this.user.location),
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 15,
+                        vertical: 7.5,
+                      ),
+                      child: Text(
+                        "joined " + timeAgo.format(timestamp),
+                        style: bioText,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    RaisedButton(
+                      shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(10),
+                      ),
+                      elevation: 10,
+                      onPressed: () {
+                        print("Clicked!");
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            Icons.code,
+                            size: 25,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(5),
+                            child: Text(
+                              "View on GitHub",
+                              style: boldSubText,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   ],
                 )
               ],

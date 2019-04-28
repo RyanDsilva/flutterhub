@@ -76,8 +76,8 @@ class _TabsState extends State<Tabs> {
               text: "Repos",
             ),
             Tab(
-              icon: Icon(Icons.people),
-              text: "Followers",
+              icon: Icon(Icons.graphic_eq),
+              text: "Stats",
             ),
           ],
         ),
