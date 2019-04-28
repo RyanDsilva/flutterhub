@@ -1,8 +1,10 @@
 class Url {
   final String api = "https://api.github.com/users/";
-  final String username;
+  String username;
 
-  Url({this.username});
+  void setUsername(username) {
+    this.username = username;
+  }
 
   String getURL() {
     return api + username;

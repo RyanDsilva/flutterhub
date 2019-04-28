@@ -7,7 +7,7 @@ import 'package:flutterhub/models/User.dart';
 
 class Profile extends StatelessWidget {
   final User user;
-  const Profile({Key key, this.user}) : super(key: key);
+  Profile({Key key, this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,50 +17,34 @@ class Profile extends StatelessWidget {
       child: new Column(
         children: <Widget>[
           new DarkCard(
-            height: 100,
             child: Column(
               children: <Widget>[
-                Image.network(
-                  this.user.image,
-                  width: 100,
+                Center(
+                  child: Container(
+                    width: 200.0,
+                    height: 200.0,
+                    margin: EdgeInsets.all(10),
+                    decoration: new BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: new DecorationImage(
+                        fit: BoxFit.fill,
+                        image: new NetworkImage(this.user.image),
+                      ),
+                    ),
+                  ),
                 ),
-              ],
-            ),
-          ),
-          new DarkCard(
-            child: Column(
-              children: <Widget>[
-                Text(
-                  this.user.name,
-                  style: titleStyle,
-                ),
-              ],
-            ),
-          ),
-          new DarkCard(
-            child: Column(
-              children: <Widget>[
-                Text(
-                  this.user.bio,
-                ),
-              ],
-            ),
-          ),
-          new DarkCard(
-            child: Column(
-              children: <Widget>[
-                Text(
-                  this.user.location,
-                ),
-              ],
-            ),
-          ),
-          new DarkCard(
-            child: Column(
-              children: <Widget>[
-                Text(
-                  this.user.createdAt,
-                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      this.user.name,
+                      style: titleStyle,
+                    ),
+                    Text(this.user.bio),
+                    Text(this.user.location),
+                    Text(this.user.createdAt),
+                  ],
+                )
               ],
             ),
           ),

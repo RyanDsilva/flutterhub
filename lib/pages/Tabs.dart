@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutterhub/models/User.dart';
 import 'package:flutterhub/models/Repo.dart';
 
+import 'package:flutterhub/util/network.dart';
+import 'package:flutterhub/util/url.dart';
+
 import 'package:flutterhub/components/TextStyles.dart';
 import 'package:flutterhub/pages/Profile.dart';
 import 'package:flutterhub/pages/Repos.dart';
@@ -18,6 +21,29 @@ class Tabs extends StatefulWidget {
 }
 
 class _TabsState extends State<Tabs> {
+  Url mainUrl = new Url();
+  Network http = new Network();
+
+  @override
+  void initState() {
+    super.initState();
+    mainUrl.setUsername(widget.username);
+  }
+
+  Future<User> getUser() async {
+    final res = await http.get(this.mainUrl.getURL());
+    return User.fromJSON(res);
+  }
+
+  Future<List<Repo>> getRepos() async {
+    List<Repo> repos = new List<Repo>();
+    final res = await http.get(this.mainUrl.getReposURL());
+    for (var r in res) {
+      repos.add(Repo.fromJSON(r));
+    }
+    return repos;
+  }
+
   @override
   Widget build(BuildContext context) {
     return new DefaultTabController(
@@ -48,26 +74,35 @@ class _TabsState extends State<Tabs> {
         ),
         body: TabBarView(
           children: <Widget>[
-            Profile(
-              user: new User(
-                name: "Ryan Dsilva",
-                image: "https://avatars2.githubusercontent.com/u/29952177?v=4",
-                bio: "20 | Deep Learning and Full Stack Developer",
-                location: "Mumbai, India",
-                url: "/",
-                createdAt: "27-2-2017",
-              ),
+            FutureBuilder<User>(
+              future: getUser(),
+              builder: (context, res) {
+                if (res.hasData) {
+                  return new Profile(
+                    user: res.data,
+                  );
+                }
+                return Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 5,
+                  ),
+                );
+              },
             ),
-            Repos(
-              repos: [
-                new Repo(
-                  name: "flutterhub",
-                  stars: 322,
-                  forks: 34,
-                  language: "Dart",
-                  isFork: false,
-                )
-              ],
+            FutureBuilder<List<Repo>>(
+              future: getRepos(),
+              builder: (context, res) {
+                if (res.hasData) {
+                  return new Repos(
+                    repos: res.data,
+                  );
+                }
+                return Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 5,
+                  ),
+                );
+              },
             ),
             Followers(
               followers: [
