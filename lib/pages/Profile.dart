@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeAgo;
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:flutterhub/components/TextStyles.dart';
 import 'package:flutterhub/components/DarkCard.dart';
@@ -9,6 +10,14 @@ import 'package:flutterhub/models/User.dart';
 class Profile extends StatelessWidget {
   final User user;
   Profile({Key key, this.user}) : super(key: key);
+
+  launchURL(url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +90,7 @@ class Profile extends StatelessWidget {
                       ),
                       elevation: 10,
                       onPressed: () {
-                        print("Clicked!");
+                        launchURL(this.user.url);
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
