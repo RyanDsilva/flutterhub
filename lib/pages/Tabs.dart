@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutterhub/models/User.dart';
 import 'package:flutterhub/models/Repo.dart';
+import 'package:flutterhub/models/StatsModel.dart';
 
 import 'package:flutterhub/util/network.dart';
 import 'package:flutterhub/util/url.dart';
@@ -10,7 +11,7 @@ import 'package:flutterhub/util/GitHub.dart';
 import 'package:flutterhub/components/TextStyles.dart';
 import 'package:flutterhub/pages/Profile.dart';
 import 'package:flutterhub/pages/Repos.dart';
-import 'package:flutterhub/pages/Followers.dart';
+import 'package:flutterhub/pages/Stats.dart';
 
 class Tabs extends StatefulWidget {
   final String username;
@@ -43,7 +44,7 @@ class _TabsState extends State<Tabs> {
   Future<List<Repo>> getRepos() async {
     List<Repo> repos = new List<Repo>();
     final res = await http.get(this.mainUrl.getReposURL() +
-        '?client_id=' +
+        '&client_id=' +
         clientID +
         '&client_secret=' +
         clientSecret);
@@ -51,6 +52,18 @@ class _TabsState extends State<Tabs> {
       repos.add(Repo.fromJSON(r));
     }
     return repos;
+  }
+
+  Future<StatsModel> getStats() async {
+    final res = await http.get(this.mainUrl.getURL() +
+        '?client_id=' +
+        clientID +
+        '&client_secret=' +
+        clientSecret);
+    StatsModel s = new StatsModel.fromJSON(res);
+    Future<List<Repo>> repos = this.getRepos();
+    s.setRepos(repos);
+    return s;
   }
 
   @override
@@ -113,18 +126,21 @@ class _TabsState extends State<Tabs> {
                 );
               },
             ),
-            Followers(
-              followers: [
-                new User(
-                  name: "Anushka Paradkar",
-                  image: "/",
-                  bio: "20 | Big Data Expert",
-                  location: "Mumbai, India",
-                  url: "/",
-                  createdAt: "27-7-2018",
-                )
-              ],
-            )
+            FutureBuilder<StatsModel>(
+              future: getStats(),
+              builder: (context, res) {
+                if (res.hasData) {
+                  return new Stats(
+                    stats: res.data,
+                  );
+                }
+                return Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 5,
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),

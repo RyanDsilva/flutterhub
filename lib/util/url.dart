@@ -15,7 +15,7 @@ class Url {
   }
 
   String getReposURL() {
-    return getURL() + "/repos";
+    return getURL() + "/repos?sort=pushed";
   }
 
   String getFollowersURL() {
