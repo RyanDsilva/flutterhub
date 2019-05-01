@@ -4,6 +4,8 @@
 
 > A GitHub client that provides a great mobile UI to analyse GitHub profiles built with Flutter
 
+<img src="./REPO/intro.gif" width=350>
+
 ### References:
 
 The following repositories and guides were of great help during the completion of this project.
